@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import messagebox
 from datetime import datetime
-from PIL import Image, ImageTk  # Necesitarás instalar Pillow: pip install Pillow
+from PIL import Image, ImageTk  
 
 def calcular_zodiaco_chino(anio):
     signos = ["Mono", "Gallo", "Perro", "Cerdo", "Rata", "Buey", 
@@ -10,20 +10,19 @@ def calcular_zodiaco_chino(anio):
 
 def imprimir_datos():
     try:
-        # Obtener datos
+        
         nombre_completo = f"{entry_nom.get()} {entry_pat.get()} {entry_mat.get()}"
         dia = int(entry_dia.get())
         mes = int(entry_mes.get())
-        anio = int(entry_anio.get())
+        año = int(entry_año.get())
         
-        # Calcular edad
-        hoy = datetime.now()
-        edad = hoy.year - anio - ((hoy.month, hoy.day) < (mes, dia))
         
-        # Calcular signo
-        signo = calcular_zodiaco_chino(anio)
+        hoy= datetime.now()
+        edad =hoy.year - año - ((hoy.month,hoy.day)< (mes, dia))
         
-        # Actualizar etiquetas de resultados
+        signo = calcular_zodiaco_chino(año)
+        
+       
         lbl_res_nombre.config(text=f"Hola {nombre_completo}")
         lbl_res_edad.config(text=f"Tienes {edad} años")
         lbl_res_signo.config(text=f"tu signo zodiacal\nEs {signo}")
@@ -36,12 +35,12 @@ def imprimir_datos():
     except ValueError:
         messagebox.showerror("Error", "Por favor ingresa datos válidos en la fecha.")
 
-# Configuración de la Ventana Principal
+
 ventana = tk.Tk()
 ventana.title("Práctica 1 - Zodiaco")
 ventana.geometry("600x400")
 
-# --- PANEL IZQUIERDO (ENTRADA) ---
+
 frame_izq = tk.Frame(ventana, padx=20, pady=20)
 frame_izq.pack(side="left", fill="both", expand=True)
 
@@ -72,8 +71,8 @@ entry_mes = tk.Entry(frame_fecha, width=5)
 entry_mes.grid(row=1, column=1)
 
 tk.Label(frame_fecha, text="Año").grid(row=0, column=2)
-entry_anio = tk.Entry(frame_fecha, width=8)
-entry_anio.grid(row=1, column=2)
+entry_año = tk.Entry(frame_fecha, width=8)
+entry_año.grid(row=1, column=2)
 
 tk.Label(frame_izq, text="\nSexo").pack()
 var_sexo = tk.StringVar(value="M")
@@ -83,7 +82,7 @@ tk.Radiobutton(frame_izq, text="Femenino", variable=var_sexo, value="F").pack()
 btn_imprimir = tk.Button(frame_izq, text="imprimir", command=imprimir_datos, bg="black", fg="white", width=15)
 btn_imprimir.pack(pady=20)
 
-# --- PANEL DERECHO (RESULTADOS) ---
+
 frame_der = tk.Frame(ventana, padx=20, pady=20, bg="white")
 frame_der.pack(side="right", fill="both", expand=True)
 
