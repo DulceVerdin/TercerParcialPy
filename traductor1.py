@@ -1,9 +1,5 @@
 import tkinter as tk
 from tkinter import messagebox
-    
-ventana = tk.Tk()
-ventana.title("Traductor")
-ventana.geometry("600x400")
 
 ARCHIVO = "diccionario.txt"
 
@@ -23,8 +19,7 @@ def registrar_palabra():
     entrada_esp.delete(0, tk.END)
 
 def buscar_traduccion(Palabra):
-    buscar = (Palabra)
-    
+    buscar = entrada_busqueda.get().strip()  
     try:
         with open(ARCHIVO, "r") as f:
             lineas = f.readlines() 
@@ -49,34 +44,33 @@ def buscar_traduccion(Palabra):
             
     except FileNotFoundError:
         messagebox.showerror("Error", "Registra una palabra primero.")
-        
-# Botones
-opcion = tk.IntVar()
 
-tk.Label(ventana, text="Ingresa la palabra a traducir:").grid(row=0, column=0, padx=10, pady=10)
-entrada_busqueda = tk.Entry(ventana)
-entrada_busqueda.grid(row=0, column=1, padx=10, pady=10)
+ventana = tk.Tk()
+ventana.title("Traductor")
+ventana.geometry("400x450")
 
-tk.Label(ventana, text="Selecciona la opción:").grid(row=1, column=0, padx=10, pady=10)
+tk.Label(ventana, text="Palabra a buscar", font=("Arial", 12, "bold")).pack(pady=10)
+entrada_busqueda = tk.Entry(ventana, width=30)
+entrada_busqueda.pack()
 
-tk.Radiobutton(ventana, text="Español - Inglés", variable=opcion, value=1).grid(row=2, column=0, padx=10)
-tk.Radiobutton(ventana, text="Inglés - Español", variable=opcion, value=2).grid(row=2, column=1, padx=10)
+tk.Label(ventana, text="Traducción: ", font=("Arial", 12, "bold")).pack(pady=10)
 
-tk.Button(ventana, text="Traducir", command=lambda: buscar_traduccion(entry.get())).grid(row=3, column=0, columnspan=2, pady=10)
+f_btns = tk.Frame(ventana)
+f_btns.pack(pady=10)
+tk.Button(f_btns, text="Ingles-Español", command=lambda:buscar_traduccion("en_es")).grid(row=0, column=0, padx=5)
+tk.Button(f_btns, text="Español-Ingles", command=lambda:buscar_traduccion("es_en")).grid(row=0, column=1, padx=5)
 
 lbl_resultado = tk.Label(ventana, text="", font=("Arial", 12))
-lbl_resultado.grid(row=4, column=0, columnspan=2, pady=10)
+lbl_resultado.pack(pady=10)
 
-tk.Label(ventana, text="Agregar nueva palabra").grid(row=5, column=0, columnspan=2, pady=10)
-
-tk.Label(ventana, text="Inglés").grid(row=6, column=0)
-entrada_ing = tk.Entry(ventana)
-entrada_ing.grid(row=7, column=0, padx=10)
-
-tk.Label(ventana, text="Español").grid(row=6, column=1)
+tk.Label(ventana, text="Registra una nueva palabra", font=("Arial", 12, "bold")).pack(pady=10)
+tk.Label(ventana, text="Español:").pack()
 entrada_esp = tk.Entry(ventana)
-entrada_esp.grid(row=7, column=1, padx=10)
+entrada_esp.pack()
+tk.Label(ventana, text="Inglés:").pack()
+entrada_ing = tk.Entry(ventana)
+entrada_ing.pack()
 
-tk.Button(ventana, text="Agregar", command=registrar_palabra).grid(row=8, column=0, columnspan=2, pady=10)
+tk.Button(ventana, text="Registrar", command=registrar_palabra).pack(pady=20)
 
 ventana.mainloop()

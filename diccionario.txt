@@ -1,2 +1,6 @@
 gallo:rooster
 cat:gato
+blue:azul
+green:verde
+snake:serpiente
+pink:rosa

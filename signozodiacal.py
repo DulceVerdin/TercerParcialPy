@@ -5,7 +5,7 @@ from PIL import Image, ImageTk
 
 def calcular_zodiaco_chino(anio):
     signos = ["Mono", "Gallo", "Perro", "Cerdo", "Rata", "Buey", 
-              "Tigre", "Conejo", "Dragón", "Serpiente", "Caballo", "Cabra"]
+              "Tigre", "Conejo", "Dragon", "Serpiente", "Caballo", "Cabra"]
     return signos[anio % 12]
 
 def imprimir_datos():
