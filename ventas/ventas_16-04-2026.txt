@@ -1,0 +1,2 @@
+Cliente: fer - Total: $200.00
+Cliente: gabi - Total: $100.00

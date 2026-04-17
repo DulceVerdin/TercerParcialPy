@@ -1,0 +1,6 @@
+Cliente: lkjnhbv 
+Total: $180.00
+Cliente: pedro
+Total: $400.00
+Cliente: juan
+Total: $120.00
